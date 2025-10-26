@@ -6,6 +6,9 @@ import pandas as pd
 import pydeck as pdk
 import plotly.express as px
 import plotly.graph_objects as go
+import feedparser
+from datetime import datetime
+import requests
 
 # --- GESTION SÉCURISÉE DU PDF ---
 def load_pdf():
@@ -38,10 +41,100 @@ st.set_page_config(
     layout="wide"
 )
 
+# --- FONCTIONS POUR MEDIUM ---
+def get_medium_articles(username="ibrahimagueye", max_articles=10):
+    """Récupère les articles Medium d'un utilisateur"""
+    try:
+        # URL du flux RSS Medium
+        url = f"https://medium.com/feed/@ibugueye"
+        
+        # Parser le flux RSS
+        feed = feedparser.parse(url)
+        
+        articles = []
+        for entry in feed.entries[:max_articles]:
+            # Extraire l'image de l'article
+            image_url = None
+            if 'content' in entry and len(entry.content) > 0:
+                # Chercher une image dans le contenu
+                import re
+                img_match = re.search(r'<img[^>]+src="([^">]+)"', entry.content[0].value)
+                if img_match:
+                    image_url = img_match.group(1)
+            
+            # Formater la date
+            published = datetime(*entry.published_parsed[:6]) if hasattr(entry, 'published_parsed') else None
+            
+            articles.append({
+                'title': entry.title,
+                'link': entry.link,
+                'published': published,
+                'summary': entry.summary if hasattr(entry, 'summary') else '',
+                'image': image_url,
+                'author': entry.author if hasattr(entry, 'author') else username
+            })
+        
+        return articles
+    except Exception as e:
+        st.error(f"Erreur lors de la récupération des articles Medium: {e}")
+        return []
+
+def display_medium_articles(articles):
+    """Affiche les articles Medium dans un format attrayant"""
+    if not articles:
+        st.info("📝 Aucun article trouvé. Mes prochaines publications arrivent bientôt!")
+        return
+    
+    for i, article in enumerate(articles):
+        col1, col2 = st.columns([3, 1])
+        
+        with col1:
+            st.subheader(article['title'])
+            
+            # Date de publication
+            if article['published']:
+                st.caption(f"📅 Publié le {article['published'].strftime('%d/%m/%Y')}")
+            
+            # Résumé
+            if article['summary']:
+                # Nettoyer le résumé (enlever le HTML)
+                import re
+                clean_summary = re.sub('<[^<]+?>', '', article['summary'])
+                clean_summary = clean_summary[:200] + "..." if len(clean_summary) > 200 else clean_summary
+                st.write(clean_summary)
+            
+            # Bouton de lecture
+            st.markdown(f"""
+            <a href="{article['link']}" target="_blank">
+                <button style="
+                    background-color: #00ab6c; 
+                    color: white; 
+                    border: none; 
+                    border-radius: 5px; 
+                    padding: 10px 20px; 
+                    cursor: pointer;
+                    margin-top: 10px;
+                ">📖 Lire l'article</button>
+            </a>
+            """, unsafe_allow_html=True)
+        
+        with col2:
+            # Image de l'article
+            if article['image']:
+                st.image(article['image'], use_container_width=True)
+            else:
+                # Image par défaut
+                st.image("https://miro.medium.com/v2/resize:fit:1400/1*psYl0y9DUzZWtHzFJLIvTw.png", 
+                        use_container_width=True, 
+                        caption="Article Medium")
+        
+        if i < len(articles) - 1:
+            st.markdown("---")
+
 # --- MENU LATÉRAL ---
 # Gestion sécurisée du logo
 try:
-    st.sidebar.image("assets/logo.png", use_column_width=True)
+    st.sidebar.image("assets/logo.png", use_container_width==True)
 except:
     st.sidebar.markdown("""
     <div style="text-align: center; padding: 10px;">
@@ -56,7 +149,7 @@ except:
     """, unsafe_allow_html=True)
 
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Aller à :", ["🏠 À propos", "💻 Applications", "🌍 Afrique", "📬 Contact"])
+page = st.sidebar.radio("Aller à :", ["🏠 À propos", "💻 Applications","📝 Publications", "🌍 Afrique",  "📬 Contact"])
 
 # --- DONNÉES AFRIQUE ---
 africa_data = {
@@ -117,7 +210,7 @@ if page == "🏠 À propos":
             "**Data Analyst & Data Scientist** – OpenClassrooms / Centrale Supélec",
             "**Master Réseaux et Télécommunications (VAE)**",
             "**Formation Administration Réseaux** – UPMC",
-            "**Chef de projet** – Conception & Développement d'applications informatiques",ISIC Paris 
+            "**Chef de projet** – Conception & Développement d'applications informatiques",
             "**DUT Gestion**",
             "**BTS Comptabilité**",
             "**Comptabilité A, B1, B2** – CNAM",
@@ -292,7 +385,7 @@ if page == "🏠 À propos":
         - **Bases de données** SQL et NoSQL
         - **APIs RESTful** et microservices
         - **Streamlit, Python, Machine Learning**
-        - **Power BI, Tableau, Excel avancé, Power Query**
+        - **Power BI, Excel avancé, VBA**
         """)
     
     # Bouton de téléchargement du PDF (toujours visible)
@@ -598,7 +691,108 @@ elif page == "🌍 Afrique":
             - Partenariats internationaux
             """)
 
-# --- PAGE 4 : CONTACT ---
+# --- PAGE 4 : PUBLICATIONS MEDIUM ---
+elif page == "📝 Publications":
+    st.markdown(
+        """
+        <div style='background:linear-gradient(90deg, #00ab6c, #0078ff); padding:30px; border-radius:10px; text-align:center; color:white; margin-bottom:30px'>
+            <h1>📝 Mes Publications Medium</h1>
+            <h3>Partage de connaissances en Data Science, IA et Innovation Africaine</h3>
+            <p>Découvrez mes articles sur la data science, l'IA et le développement technologique en Afrique</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Configuration pour les articles Medium
+    col1, col2 = st.columns([3, 1])
+    
+    with col1:
+        st.subheader("📚 Dernières Publications")
+        
+        # Indicateur de chargement
+        with st.spinner("Chargement des articles Medium..."):
+            # Récupérer les articles Medium
+            articles = get_medium_articles("ibrahimagueye", 10)  # Remplacez par votre username Medium
+            
+            # Afficher les articles
+            display_medium_articles(articles)
+    
+    with col2:
+        st.subheader("🔍 Filtres")
+        
+        # Filtres optionnels
+        st.selectbox("Trier par:", ["Plus récents", "Plus populaires", "Plus lus"])
+        st.multiselect("Catégories:", ["Data Science", "IA", "Afrique Tech", "Business", "Tutoriels"])
+        
+        st.markdown("---")
+        st.subheader("📈 Statistiques")
+        
+        # Statistiques fictives (à adapter avec vos vraies stats)
+        st.metric("Articles publiés", len(articles))
+        st.metric("Lectures totales", "5K+")
+        st.metric("Followers", "500+")
+        
+        st.markdown("---")
+        st.subheader("💡 Sujets abordés")
+        st.markdown("""
+        - 🤖 Intelligence Artificielle
+        - 📊 Data Science
+        - 🌍 Tech Africaine
+        - 💼 Business Intelligence
+        - 🎓 Tutoriels pratiques
+        - 🚀 Innovation
+        """)
+    
+    # Section d'appel à l'action
+    st.markdown("---")
+    st.subheader("🎯 Rejoignez-moi sur Medium")
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div style='text-align: center; padding: 20px; background: #f0f2f6; border-radius: 10px;'>
+            <h3>📖 Lire</h3>
+            <p>Découvrez mes analyses sur la data et l'innovation</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div style='text-align: center; padding: 20px; background: #f0f2f6; border-radius: 10px;'>
+            <h3>👥 Suivre</h3>
+            <p>Restez informé de mes nouvelles publications</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div style='text-align: center; padding: 20px; background: #f0f2f6; border-radius: 10px;'>
+            <h3>💬 Interagir</h3>
+            <p>Commentez et partagez vos retours</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Lien vers le profil Medium
+    st.markdown("""
+    <div style='text-align: center; margin-top: 30px;'>
+        <a href="https://medium.com/@ibugueye" target="_blank">
+            <button style='
+                background-color: #00ab6c; 
+                color: white; 
+                border: none; 
+                border-radius: 25px; 
+                padding: 15px 30px; 
+                font-size: 18px;
+                cursor: pointer;
+                margin: 10px;
+            '>📝 Voir mon profil Medium complet</button>
+        </a>
+    </div>
+    """, unsafe_allow_html=True)
+
+# --- PAGE 5 : CONTACT ---
 elif page == "📬 Contact":
     st.markdown(
         """
@@ -620,6 +814,7 @@ elif page == "📬 Contact":
         **📧 Email :** [ibugueye@gmail.com](mailto:ibugueye@gmail.com)  
         **💼 LinkedIn :** [linkedin.com/in/ibrahima-gueye](https://www.linkedin.com/)  
         **🐙 GitHub :** [github.com/ibrahimagueye](https://github.com/)  
+        **📝 Medium :** [medium.com/@ibugueye](https://medium.com/@ibugueye)  
         **📱 Téléphone :** +33 7 83 51 62 33  
         """)
     
@@ -632,6 +827,8 @@ elif page == "📬 Contact":
         - Développement d'Applications
         - Supervision Technique
         - Formation & Pédagogie
+        - Rédaction Technique
+        - Stratégie Afrique
         """)
 
     st.divider()
@@ -647,6 +844,7 @@ elif page == "📬 Contact":
     - **📊 Comptabilité & contrôle de gestion** : discipline analytique  
     - **🌐 Réseaux & télécoms** : infrastructures critiques et supervision technique
     - **🤖 Data Science & analyse de données** : transformation de données complexes en leviers stratégiques
+    - **📝 Rédaction & partage** : transmission de connaissances via Medium
     """)
     
     st.markdown("---")
@@ -659,17 +857,19 @@ with st.sidebar:
     st.markdown("""
     **Email:** ibugueye@gmail.com  
     **Tél:** +33 7 83 51 62 33
-    **LinkedIn:** [Ibrahima Gueye](https://linkedin.com/in/ibucoumba/)  
-    **GitHub:** [ibugueye](https://github.com/ibugueye/)
+    **LinkedIn:** [Ibugueye](https://linkedin.com/in/ibucoumba/)  
+    **GitHub:** [ibugueye](https://github.com/ibugueye?tab=repositories)
+    **Medium:** [ ibugueye](https://medium.com/@ibugueye)
     """)
     
     st.header("🎯 Expertises")
     st.markdown("""
-    - Data Science & Data Analyse
+    - Data Science & Analyse
     - Contrôle de Gestion
     - Réseaux & Télécoms
     - Développement d'Apps
     - Formation & Pédagogie
+    - Rédaction Technique
     - Stratégie Afrique
     """)
     
@@ -679,6 +879,20 @@ with st.sidebar:
         st.success("✅ Portfolio disponible")
     else:
         st.warning("📄 Portfolio en cours")
+    
+    # Dernières publications dans la sidebar
+    st.markdown("---")
+    st.header("📝 Dernier Article")
+    try:
+        articles = get_medium_articles("ibrahimagueye", 1)
+        if articles:
+            article = articles[0]
+            st.write(f"**{article['title']}**")
+            if article['published']:
+                st.caption(f"Publié le {article['published'].strftime('%d/%m/%Y')}")
+            st.markdown(f"[Lire l'article →]({article['link']})")
+    except:
+        st.info("Chargement des articles...")
     
     st.markdown("---")
     st.markdown("""
