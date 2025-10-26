@@ -117,7 +117,7 @@ if page == "🏠 À propos":
             "**Data Analyst & Data Scientist** – OpenClassrooms / Centrale Supélec",
             "**Master Réseaux et Télécommunications (VAE)**",
             "**Formation Administration Réseaux** – UPMC",
-            "**Chef de projet** – Conception & Développement d'applications informatiques",
+            "**Chef de projet** – Conception & Développement d'applications informatiques",ISIC Paris 
             "**DUT Gestion**",
             "**BTS Comptabilité**",
             "**Comptabilité A, B1, B2** – CNAM",
@@ -292,7 +292,7 @@ if page == "🏠 À propos":
         - **Bases de données** SQL et NoSQL
         - **APIs RESTful** et microservices
         - **Streamlit, Python, Machine Learning**
-        - **Power BI, Excel avancé, VBA**
+        - **Power BI, Tableau , Excel avancé, Power Query**
         """)
     
     # Bouton de téléchargement du PDF (toujours visible)
