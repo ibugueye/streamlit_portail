@@ -1,22 +1,62 @@
 [
   {
-    "name": "📊 Tableau de Bord Financier",
-    "description": "Analyse financière complète avec ratios, prévisions IA et graphiques dynamiques.",
-    "url": "https://mon-dashboard-financier.onrender.com"
+    "name": "💡 AI Marketing Explorer",
+    "category": "Marketing",
+    "description": "Application interactive d’analyse marketing (CLV, ROAS, CPA, RFM) et d’IA appliquée au marketing digital.",
+    "url": "https://marketing-app-hvgz.onrender.com"
   },
   {
-    "name": "💳 Scoring Crédit",
-    "description": "Application de scoring crédit avec SHAP, MLflow et explications IA.",
-    "url": "https://scoring-credit-streamlit.onrender.com"
+    "name": "📈 Analyse Financière",
+    "category": "Finance",
+    "description": "Outil complet d’analyse financière et de diagnostic de performance des entreprises.",
+    "url": "https://analyse-financiere.onrender.com"
   },
   {
-    "name": "🏨 Gestion Hôtelière",
-    "description": "Plateforme complète de gestion hôtelière : ventes, hébergement, revenus et performance.",
-    "url": "https://gestion-hoteliere.onrender.com"
+    "name": "💰 Gestion Financière",
+    "category": "Finance",
+    "description": "Application dédiée à la gestion financière, la planification budgétaire et la modélisation Excel-Python.",
+    "url": "https://gestion-finance-5ekf.onrender.com"
   },
   {
-    "name": "📚 Système Éducatif RAG",
-    "description": "Application RAG éducative connectée à plusieurs supports PDF et quiz interactifs.",
-    "url": "https://systeme-educatif-rag.onrender.com"
+    "name": "📊 Contrôle de Gestion",
+    "category": "Finance",
+    "description": "Dashboard interactif pour le contrôle de gestion et la visualisation des écarts budgétaires.",
+    "url": "https://controle-de-gestion.onrender.com"
+  },
+  {
+    "name": "🧠 Gestion & Data Science",
+    "category": "IA",
+    "description": "Application pédagogique pour relier data science et gestion : indicateurs, prévisions, IA appliquée.",
+    "url": "https://gestion-data-science.onrender.com"
+  },
+  {
+    "name": "💳 Exemple Credit Score",
+    "category": "IA",
+    "description": "Exemple d’application de scoring de crédit avec explication des modèles et prédiction du risque.",
+    "url": "https://webapp-1-4ouf.onrender.com"
+  },
+  {
+    "name": "🤖 Application Data Science Credit Scoring",
+    "category": "IA",
+    "description": "Application complète de scoring crédit intégrant MLflow, SHAP et Streamlit pour l’explicabilité.",
+    "url": "https://webapp-0n2z.onrender.com"
+  },
+  {
+    "name": "📘 Cours de Data Science",
+    "category": "Éducation",
+    "description": "Cours complet en ligne sur les fondamentaux de la data science, des statistiques à l’IA.",
+    "url": "https://cours-de-data-science.onrender.com"
+  },
+  {
+    "name": "🎓 Cours Interactif de Data Science",
+    "category": "Éducation",
+    "description": "Version interactive et pratique des cours de data science, avec quiz et exercices.",
+    "url": "https://cours-interactif-de-data-science.onrender.com"
+  },
+  {
+    "name": "📉 Analyse Financière Avancée",
+    "category": "Finance",
+    "description": "Application d’analyse financière approfondie avec ratios, prévisions et interprétations IA.",
+    "url": "https://analyseanalyse-financiere.onrender.com"
   }
 ]
