@@ -207,18 +207,21 @@ if page == "🏠 À propos":
         st.header("🎓 Parcours de Formation")
         
         formations = [
-            "**Data Analyst & Data Scientist** – OpenClassrooms / Centrale Supélec",
-            "**Master Réseaux et Télécommunications (VAE)**",
+            "**Data Scientist** – OpenClassrooms / Centrale Supélec",
+            "**Data Analyst & Data Scientist** - OpenClassrooms / l’ENSAE - ENSAI",
+            "**Master Réseaux et Télécommunications (VAE) - UPMC**",
             "**Formation Administration Réseaux** – UPMC",
-            "**Chef de projet** – Conception & Développement d'applications informatiques",
-            "**DUT Gestion**",
-            "**BTS Comptabilité**",
-            "**Comptabilité A, B1, B2** – CNAM",
-            "**Cours de mathématiques** – CNAM",
+            "**Architecte infrastructure Réseaux et Systèmes** - CNAM Paris 
+            "**Micro-réseaux Maintenance informatique, sécurité réseau, hotline** – GRETA de Paris ",
+            "**Chef de projet**– Conception & Développement d'applications informatiques - ESIC " ,
+            "**DUT Gestion**" - Iut Paris-sud De Sceaux,
+            "**BTS Comptabilité**" - Top Formation  ENC , 
+            "**Comptabilité A, B1, B2** – CNAM Paris",
+            "**Cours de mathématiques** – CNAM Paris ",
             "**Contrôle de gestion** – École des Cadres",
-            "**Gestion de la paie**",
-            "**Formation micro-réseaux** – GRETA de Paris",
-            "**Maintenance informatique, sécurité réseau, hotline**"
+       
+         
+            
         ]
         
         for formation in formations:
