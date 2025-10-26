@@ -108,6 +108,7 @@ if page == "🏠 À propos":
         experiences = [
             "**Analyste principal** – Backbone France Télécom",
             "**Supervision Réseaux Télécom**",
+            "**Responsable Réseau & Maintenance  Informatique**",
             "**Support Technique Informatique**",
             "**Ingénieur Commercial Informatique**",
             "**Technicien Réseaux & Télécom**",
@@ -129,6 +130,7 @@ if page == "🏠 À propos":
             competences_tech = [
                 "Réseaux & Télécoms",
                 "Sécurité Informatique", 
+                "Responsable Maintenance applications & Réseau",
                 "Supervision Réseaux",
                 "Data Science (Python, ML, Streamlit)",
                 "SQL",
