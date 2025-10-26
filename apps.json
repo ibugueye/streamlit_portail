@@ -1,0 +1,22 @@
+[
+  {
+    "name": "📊 Tableau de Bord Financier",
+    "description": "Analyse financière complète avec ratios, prévisions IA et graphiques dynamiques.",
+    "url": "https://mon-dashboard-financier.onrender.com"
+  },
+  {
+    "name": "💳 Scoring Crédit",
+    "description": "Application de scoring crédit avec SHAP, MLflow et explications IA.",
+    "url": "https://scoring-credit-streamlit.onrender.com"
+  },
+  {
+    "name": "🏨 Gestion Hôtelière",
+    "description": "Plateforme complète de gestion hôtelière : ventes, hébergement, revenus et performance.",
+    "url": "https://gestion-hoteliere.onrender.com"
+  },
+  {
+    "name": "📚 Système Éducatif RAG",
+    "description": "Application RAG éducative connectée à plusieurs supports PDF et quiz interactifs.",
+    "url": "https://systeme-educatif-rag.onrender.com"
+  }
+]

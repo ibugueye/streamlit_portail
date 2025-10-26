@@ -1,0 +1,7 @@
+streamlit_portail
+│
+├── app.py
+├── apps.json
+├── requirements.txt
+└── assets
+    └── logo.png
