@@ -292,7 +292,7 @@ if page == "🏠 À propos":
         - **Bases de données** SQL et NoSQL
         - **APIs RESTful** et microservices
         - **Streamlit, Python, Machine Learning**
-        - **Power BI, Tableau , Excel avancé, Power Query**
+        - **Power BI, Tableau, Excel avancé, Power Query**
         """)
     
     # Bouton de téléchargement du PDF (toujours visible)
@@ -665,7 +665,7 @@ with st.sidebar:
     
     st.header("🎯 Expertises")
     st.markdown("""
-    - Data Science & Analyse
+    - Data Science & Data Analyse
     - Contrôle de Gestion
     - Réseaux & Télécoms
     - Développement d'Apps
