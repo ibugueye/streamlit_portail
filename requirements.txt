@@ -2,4 +2,6 @@ streamlit==1.39.0
 feedparser
 plotly
 matplotlib
+seaborn 
+
 
