@@ -1,7 +1,13 @@
 streamlit==1.39.0
-feedparser
+pandas
+numpy
 plotly
+seaborn
+scikit-learn
 matplotlib
-seaborn 
+feedparser
+matplotlib
+
+
 
 
