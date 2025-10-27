@@ -208,7 +208,7 @@ if page == "🏠 À propos":
         
         formations = [
             "**Data Scientist** – OpenClassrooms / Centrale Supélec",
-            "**Data Analyst & Data Scientist** - OpenClassrooms / l’ENSAE - ENSAI",
+            "**Data Analyst ** - OpenClassrooms / l’ENSAE - ENSAI",
             "**Master Réseaux et Télécommunications (VAE) - UPMC**",
             "**DU Administration Réseaux & Systemes** – UPMC",
             "**Architecte infrastructure Réseaux et Systèmes** - CNAM Paris" ,
@@ -256,8 +256,11 @@ if page == "🏠 À propos":
                 "Sécurité Informatique", 
                 "Supervision Réseaux",
                 "Data Science (Python, ML, Streamlit)",
-                "SQL",
-                "Administration Systèmes"
+                "Base de Données (Ms Sql Server, MySql,PostgreSQL, NodeJS,Mongo DB,Cassandra, ELK )",                    
+                "Cloud (AWS, Azure )",
+                "Administration Systèmes",
+                "Gestion de projet et Méthodologies (Agile, Scum UML.Ms project , PERT ,GANT , Mind Map ,Kamban )",
+
             ]
             for comp in competences_tech:
                 st.markdown(f"• {comp}")
