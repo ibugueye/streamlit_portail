@@ -121,7 +121,7 @@ def display_medium_articles(articles):
         with col2:
             # Image de l'article
             if article['image']:
-                st.image(article['image'], use_container_width=True)
+                st.image(article['image'], use_column_width=True)
             else:
                 # Image par défaut
                 st.image("https://miro.medium.com/v2/resize:fit:1400/1*psYl0y9DUzZWtHzFJLIvTw.png", 
