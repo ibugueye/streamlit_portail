@@ -210,7 +210,7 @@ if page == "🏠 À propos":
             "**Data Scientist** – OpenClassrooms / Centrale Supélec",
             "**Data Analyst & Data Scientist** - OpenClassrooms / l’ENSAE - ENSAI",
             "**Master Réseaux et Télécommunications (VAE) - UPMC**",
-            "**Formation Administration Réseaux** – UPMC",
+            "**DU Administration Réseaux & Systemes** – UPMC",
             "**Architecte infrastructure Réseaux et Systèmes** - CNAM Paris" ,
             "**Micro-réseaux Maintenance informatique, sécurité réseau, hotline** – GRETA de Paris ",
             "**Chef de projet**– Conception & Développement d'applications informatiques - ESIC " ,
