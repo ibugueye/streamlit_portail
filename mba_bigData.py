@@ -2301,66 +2301,99 @@ def section_science_donnees():
                             projection="natural earth")
             st.plotly_chart(fig, use_container_width=True)
         
-elif viz_type == "Network Analysis":
-                st.warning("**🕸️ Analyse de Réseaux et Relations**")
+        elif viz_type == "Network Analysis":
+            st.warning("**🕸️ Analyse de Réseaux et Relations**")
             
             st.markdown("""
             **Applications:**
             - Analyse des relations clients
-            - Détection de communautés  
+            - Détection de communautés
             - Optimisation des réseaux logistiques
             """)
             
-            # Solution ULTRA-SIMPLE sans NetworkX
-            st.subheader("📊 Analyse Relationnelle Client")
-            
-            # Générer des données simples
+            # Simulation d'un réseau social de clients
             np.random.seed(42)
-            n_clients = 50
+            n_nodes = 30
             
-            data = {
-                'client_id': [f'Client_{i}' for i in range(1, n_clients + 1)],
-                'segment': np.random.choice(['VIP', 'Fidèle', 'Régulier', 'Occasionnel'], n_clients),
-                'valeur': np.random.randint(1000, 50000, n_clients),
-                'connexions': np.random.randint(1, 25, n_clients),
-                'influence': np.random.uniform(0.1, 1.0, n_clients)
-            }
+            # Création d'un graph de réseau
+            G = nx.erdos_renyi_graph(n_nodes, 0.1)
+            pos = nx.spring_layout(G)
             
-            df = pd.DataFrame(data)
+            # Attributs des nœuds
+            for i in range(n_nodes):
+                G.nodes[i]['segment'] = np.random.choice(['VIP', 'Fidèle', 'Régulier', 'Occasionnel'])
+                G.nodes[i]['valeur'] = np.random.randint(1000, 50000)
             
-            # Visualisation simple et robuste
-            fig = px.scatter(df, x='connexions', y='valeur',
-                           color='segment', size='influence',
-                           title="Analyse des Relations Clients",
-                           hover_data=['client_id'],
-                           size_max=15)
+            # Visualisation avec plotly
+            edge_x = []
+            edge_y = []
+            for edge in G.edges():
+                x0, y0 = pos[edge[0]]
+                x1, y1 = pos[edge[1]]
+                edge_x.extend([x0, x1, None])
+                edge_y.extend([y0, y1, None])
+            
+            edge_trace = go.Scatter(
+                x=edge_x, y=edge_y,
+                line=dict(width=0.5, color='#888'),
+                hoverinfo='none',
+                mode='lines')
+            
+            node_x = []
+            node_y = []
+            node_text = []
+            node_color = []
+            for node in G.nodes():
+                x, y = pos[node]
+                node_x.append(x)
+                node_y.append(y)
+                node_text.append(f"Client {node}<br>Segment: {G.nodes[node]['segment']}<br>Valeur: {G.nodes[node]['valeur']}€")
+                node_color.append(G.nodes[node]['valeur'])
+            
+            node_trace = go.Scatter(
+                x=node_x, y=node_y,
+                mode='markers',
+                hoverinfo='text',
+                marker=dict(
+                    showscale=True,
+                    colorscale='YlGnBu',
+                    size=10,
+                    colorbar=dict(
+                        thickness=15,
+                        title='Valeur Client',
+                        xanchor='left',
+                        titleside='right'
+                    ),
+                    line_width=2))
+            
+            node_trace.text = node_text
+            node_trace.marker.color = node_color
+            
+            fig = go.Figure(data=[edge_trace, node_trace],
+                          layout=go.Layout(
+                              title='Réseau des Relations Clients',
+                              showlegend=False,
+                              hovermode='closest',
+                              margin=dict(b=20,l=5,r=5,t=40),
+                              annotations=[ dict(
+                                  text="Analyse des communautés clients",
+                                  showarrow=False,
+                                  xref="paper", yref="paper",
+                                  x=0.005, y=-0.002 ) ],
+                              xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                              yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
+                          )
             
             st.plotly_chart(fig, use_container_width=True)
             
-            # Métriques de base
+            # Métriques du réseau
             col1, col2, col3 = st.columns(3)
-            
             with col1:
-                st.metric("Clients analysés", n_clients)
-            
+                st.metric("Nombre de nœuds", G.number_of_nodes())
             with col2:
-                avg_connections = df['connexions'].mean()
-                st.metric("Connexions moyennes", f"{avg_connections:.1f}")
-            
+                st.metric("Nombre de liens", G.number_of_edges())
             with col3:
-                total_value = df['valeur'].sum()
-                st.metric("Valeur totale", f"{total_value:,} €")
-            
-            # Analyse par segment
-            st.subheader("🎯 Performance par Segment")
-            
-            segment_stats = df.groupby('segment').agg({
-                'valeur': ['mean', 'count', 'sum'],
-                'connexions': 'mean',
-                'influence': 'mean'
-            }).round(2)
-            
-            st.dataframe(segment_stats)
+                st.metric("Densité du réseau", f"{nx.density(G):.3f}")
         
         elif viz_type == "Dashboard Interactif":
             st.success("**📱 Tableau de Bord Interactif Temps Réel**")
