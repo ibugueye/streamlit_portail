@@ -2362,7 +2362,7 @@ def section_science_donnees():
                         thickness=15,
                         title='Valeur Client',
                         xanchor='left',
-                        titleside='right'
+                        title_side='right'
                     ),
                     line_width=2))
             
