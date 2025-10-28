@@ -2301,8 +2301,7 @@ def section_science_donnees():
                             projection="natural earth")
             st.plotly_chart(fig, use_container_width=True)
         
-        
-            elif viz_type == "Network Analysis":
+elif viz_type == "Network Analysis":
                 st.warning("**🕸️ Analyse de Réseaux et Relations**")
             
             st.markdown("""
