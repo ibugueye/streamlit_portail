@@ -8,6 +8,8 @@ matplotlib
 feedparser
 matplotlib
 statsmodels
+networkx 
+
 
 
 
