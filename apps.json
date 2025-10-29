@@ -29,6 +29,12 @@
     "description": "Application pédagogique pour relier data science et gestion : indicateurs, prévisions, IA appliquée.",
     "url": "https://gestion-data-science.onrender.com"
   },
+  {"name": "🎓 Big Data MBA",
+    "category": "IA",:
+    "description": " Programme complet de formation en Big Data et Intelligence Artificielle",
+    "url":"https://big-data-mba.onrender.com"
+  },
+  
   {
     "name": "💳 Exemple Credit Score",
     "category": "IA",
