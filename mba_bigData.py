@@ -136,9 +136,19 @@ def section_introduction():
         st.markdown("""
         ### Définition Complète du Big Data
         
+        Le **Big Data** (Mégadonnées en français) désigne des **volumes massifs de données** 
+        si grands et complexes qu'ils ne peuvent pas être traités avec les outils traditionnels.
+        
         Le **Big Data** représente l'ensemble des données dont le **volume**, la **vélocité** et la **variété** 
         nécessitent des technologies et méthodes analytiques spécifiques pour en extraire de la valeur.
+
+        ### 📖 Analogie Simple
+        **Imaginez :**
+        - 🏢 **Données traditionnelles** = Une bibliothèque
+        - 🌊 **Big Data** = Tous les océans du monde
         
+        On passe d'une gestion manuelle à une gestion industrielle des données !
+
         #### Évolution du Concept
         - **Années 2000** : Emergence des 3V (Volume, Vélocité, Variété)
         - **Années 2010** : Ajout de la Véracité et de la Valeur
@@ -149,43 +159,87 @@ def section_introduction():
         st.image("https://via.placeholder.com/300x200/4C78A8/FFFFFF?text=Big+Data+Ecosystem", 
                 caption="Écosystème Big Data Moderne")
     
-    # Les 5V du Big Data
-    st.subheader("📊 Les 5V du Big Data : Définitions Détaillées")
+    # Ajouter un séparateur avant les 5V
+    st.markdown("---")
     
+    # Maintenant afficher les 5V du Big Data
+    st.subheader("📊 Les 5V du Big Data : Définitions Détaillées")
+
+    # Définitions des 5V
     v_definitions = {
         "📦 Volume": {
             "definition": "Quantité massive de données générées, souvent en téraoctets ou pétaoctets",
             "exemple": "**Walmart** traite 2.5+ pétaoctets/heure de données de caisse",
-            "defi": "Stockage et traitement distribué"
+            "defi": "Stockage et traitement distribué",
+            "details": """
+            - **Énormes quantités** de données générées
+            - **Exemples :** 
+              - 500 millions de tweets par jour
+              - 4,2 milliards de vidéos YouTube vues quotidiennement
+              - 3,5 milliards de recherches Google par jour
+            - **Chiffre clé :** 2,5 trillions d'octets créés chaque jour
+            """
         },
         "⚡ Vélocité": {
             "definition": "Vitesse de génération, collecte et traitement des données",
             "exemple": "**Visa** analyse des milliards de transactions en temps réel",
-            "defi": "Traitement en temps réel"
+            "defi": "Traitement en temps réel",
+            "details": """
+            - **Vitesse** à laquelle les données sont générées et traitées
+            - **Temps réel** ou quasi réel
+            - **Exemple :** 
+              - Transactions boursières (microsecondes)
+              - Capteurs IoT (flux continu)
+              - Réseaux sociaux (données streaming)
+            """
         },
         "🎭 Variété": {
             "definition": "Diversité des formats : structuré, semi-structuré, non structuré",
             "exemple": "**Netflix** combine données d'abonnement et de visionnage",
-            "defi": "Intégration multi-sources"
+            "defi": "Intégration multi-sources",
+            "details": """
+            - **Divers formats** de données :
+              - **Structurées** : Bases de données SQL
+              - **Semi-structurées** : JSON, XML
+              - **Non structurées** : Textes, images, vidéos, audio
+            - **Exemple :** Données GPS, emails, photos, vidéos surveillance
+            """
         },
         "✅ Véracité": {
             "definition": "Qualité, fiabilité et exactitude des données",
             "exemple": "Nettoyage des logs de clics pour analyse comportementale",
-            "defi": "Gouvernance et qualité"
+            "defi": "Gouvernance et qualité",
+            "details": """
+            - **Fiabilité et qualité** des données
+            - Nettoyage et validation nécessaire
+            - **Exemple :** 
+              - Données erronées ou incomplètes
+              - Fake news sur les réseaux
+              - Données bruitées des capteurs
+            """
         },
         "💰 Valeur": {
             "definition": "Bénéfice métier concret extrait des données",
             "exemple": "Campagne marketing ciblée boostant les profits de 25%",
-            "defi": "ROI et alignement métier"
+            "defi": "ROI et alignement métier",
+            "details": """
+            - **Utilité business** extraite des données
+            - Insights et décisions stratégiques
+            - **Objectif :** Transformer les données en valeur
+            - **Exemple :** Recommandations Amazon, prédictions météo
+            """
         }
     }
-    
-    for v, details in v_definitions.items():
-        with st.expander(f"{v}"):
-            st.write(f"**Définition :** {details['definition']}")
-            st.write(f"**Cas pratique :** {details['exemple']}")
-            st.write(f"**Défi :** {details['defi']}")
 
+    # Affichage avec boucle
+    for i, (v, details) in enumerate(v_definitions.items(), 1):
+        with st.expander(f"### {i}. {v}", expanded=(i == 1)):
+            st.markdown(f"**📖 Définition :** {details['definition']}")
+            st.markdown(f"**🏢 Cas pratique :** {details['exemple']}")
+            st.markdown(f"**⚡ Défi :** {details['defi']}")
+            st.markdown("---")
+            st.markdown("**📋 Détails complémentaires :**")
+            st.markdown(details['details'])
 # =============================================================================
 # SECTION 2: TECHNOLOGIES ET ARCHITECTURES
 # =============================================================================
