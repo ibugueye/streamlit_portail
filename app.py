@@ -412,7 +412,7 @@ elif page == "💻 Applications":
         """
         <div style='background:linear-gradient(90deg, #004aad, #0078ff); padding:25px; border-radius:10px; text-align:center; color:white'>
             <h2>💻 Mes Applications Streamlit</h2>
-            <p>Explorez mes projets en Finance, IA, Éducation et Marketing</p>
+            <p>Explorez mes projets en Finance, Réassurance ,IA, Éducation et Marketing</p>
         </div>
         """,
         unsafe_allow_html=True
