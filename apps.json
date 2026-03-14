@@ -77,9 +77,10 @@
     "description": "Application la Réassurance  approfondie par la pratique avec ratios  IA.",
     "url": "https://reassurance-final.onrender.com/"
   },
+  
   {
   "name":"Apprendre la Data science",
-  "Category":"Education",
+  "Category": "Education",
   "description": " Cours interactif  complet de data science avec des cas reels tirés de DATA SCIENCE ET CONTÖLE DE DE GESTION le nouveau pipeline de la performance "
   "url": "https://datascience.space.z.ai/"
   };
